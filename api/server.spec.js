@@ -22,11 +22,28 @@ describe("server.js", () => {
         .send({ title: "test" })
         .expect(422);
     });
+
+    it("should return an object", async () => {
+      const body = {
+        title: "Pong",
+        genre: "Arcade",
+        releaseYear: 1972
+      };
+      const res = await request(server)
+        .post("/games")
+        .send(body);
+      expect(typeof res.body).toEqual("object");
+    });
   });
 
   describe("/GET", () => {
     afterEach(() => {
       db("games").truncate();
+    });
+
+    it("should return status code 200", async () => {
+      const res = await request(server).get("/games");
+      expect(res.status).toBe(200);
     });
 
     it("should return an empty array", async () => {
