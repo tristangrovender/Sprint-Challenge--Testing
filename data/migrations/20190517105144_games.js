@@ -4,10 +4,11 @@ exports.up = function(knex, Promise) {
 
     tbl.string("title", 256).notNullable();
     tbl.string("genre", 256).notNullable();
-    tbl.integer("release year", 4);
+    tbl.integer("releaseYear", 4).notNullable();
   });
 };
 
 exports.down = function(knex, Promise) {
   return knex.schema.dropTableIfExists('games');
 };
+
